@@ -1,0 +1,16 @@
+language: java
+
+jdk:
+  - oraclejdk9
+
+before_install:
+  - chmod +x gradlew
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+ # cache between builds
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.gradle
