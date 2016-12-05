@@ -19,6 +19,7 @@ package hu.akarnokd.rxjava2.interop;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.functions.ObjectHelper;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.processors.FlowableProcessor;
 
 import java.util.concurrent.Flow;
@@ -34,6 +35,14 @@ public final class FlowInterop {
         throw new IllegalStateException("No instances!");
     }
 
+    /**
+     * Wraps a Flow.Publisher into a Flowable.
+     * @param source the source Flow.Publisher, not null
+     * @param <T> the value type
+     * @return the new Flowable instance
+     * @throws NullPointerException if source is null
+     */
+    @SuppressWarnings("unchecked")
     public static <T> Flowable<T> fromFlowPublisher(Flow.Publisher<T> source) {
         if (source instanceof Flowable) {
             return (Flowable<T>)source;
@@ -42,7 +51,7 @@ public final class FlowInterop {
             return Flowable.fromPublisher((org.reactivestreams.Publisher<T>)source);
         }
         ObjectHelper.requireNonNull(source, "source is null");
-        return new FlowableFromFlowPublisher<T>(source);
+        return RxJavaPlugins.onAssembly(new FlowableFromFlowPublisher<>(source));
     }
 
     /**
@@ -51,21 +60,55 @@ public final class FlowInterop {
      * @return the Function instance to be used with {@code Flowable.to()}.
      */
     public static <T> Function<Flowable<T>, Flow.Publisher<T>> toFlow() {
-        return f -> new FlowFromPublisher<>(f);
+        return FlowFromPublisher::new;
     }
 
+    /**
+     * Wraps a Flow.Processor (identity) into a FlowableProcessor.
+     * @param source the source Flow.Processor, not null
+     * @param <T> the input and output type of the Flow.Processor
+     * @return the new FlowableProcessor instance
+     * @throws  NullPointerException if source is null
+     */
+    @SuppressWarnings("unchecked")
     public static <T> FlowableProcessor<T> fromFlowProcessor(Flow.Processor<T, T> source) {
-        // TODO implement
-        throw new UnsupportedOperationException();
+        if (source instanceof FlowableProcessor) {
+            return (FlowableProcessor<T>)source;
+        }
+        ObjectHelper.requireNonNull(source, "source is null");
+        return new FlowableProcessorFromFlowProcessor<>(source);
     }
 
+    /**
+     * Wraps an RS Publisher into a Flow.Publisher.
+     * @param source the source RS Publisher instance, not null
+     * @param <T> the value type
+     * @return the new Flow.Publisher instance
+     * @throws NullPointerException if source is null
+     */
+    @SuppressWarnings("unchecked")
     public static <T> Flow.Publisher<T> toFlowPublisher(org.reactivestreams.Publisher<T> source) {
-        // TODO implement
-        throw new UnsupportedOperationException();
+        if (source instanceof Flow.Publisher) {
+            return (Flow.Publisher<T>)source;
+        }
+        ObjectHelper.requireNonNull(source, "source is null");
+        return new FlowFromPublisher<>(source);
     }
 
+    /**
+     * Wraps an RS Processor into a Flow.Processor.
+     * @param source the source RS Processor
+     * @param <T> the input value type
+     * @param <R> the output value type
+     * @return the new Flow.Processor instance
+     * @throws NullPointerException if source is null
+     */
+    @SuppressWarnings("unchecked")
     public static <T, R> Flow.Processor<T, R> toFlowProcessor(org.reactivestreams.Processor<T, R> source) {
-        // TODO implement
-        throw new UnsupportedOperationException();
+        if (source instanceof Flow.Processor) {
+            return (Flow.Processor<T, R>)source;
+        }
+        ObjectHelper.requireNonNull(source, "source is null");
+        return new FlowProcessorFromProcessor<>(source);
     }
 }

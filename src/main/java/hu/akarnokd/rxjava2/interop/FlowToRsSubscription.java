@@ -22,11 +22,11 @@ import java.util.concurrent.Flow;
  * An RS Subscription that wraps a Flow.Subscription.
  * @since 0.1.0
  */
-final class FlowSubscription implements org.reactivestreams.Subscription {
+final class FlowToRsSubscription implements org.reactivestreams.Subscription {
 
     final Flow.Subscription s;
 
-    FlowSubscription(Flow.Subscription s) {
+    FlowToRsSubscription(Flow.Subscription s) {
         this.s = s;
     }
 

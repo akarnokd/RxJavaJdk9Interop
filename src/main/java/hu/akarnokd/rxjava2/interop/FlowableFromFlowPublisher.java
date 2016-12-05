@@ -33,48 +33,7 @@ final class FlowableFromFlowPublisher<T> extends Flowable<T> {
 
     @Override
     protected void subscribeActual(org.reactivestreams.Subscriber<? super T> s) {
-        source.subscribe(new FromFlowPublisherSubscriber<>(s));
+        source.subscribe(new FlowToRsSubscriber<>(s));
     }
 
-    static final class FromFlowPublisherSubscriber<T> implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
-
-        final org.reactivestreams.Subscriber<? super T> actual;
-
-        Flow.Subscription s;
-
-        FromFlowPublisherSubscriber(org.reactivestreams.Subscriber<? super T> actual) {
-            this.actual = actual;
-        }
-
-        @Override
-        public void onSubscribe(Flow.Subscription subscription) {
-            this.s = subscription;
-            actual.onSubscribe(this);
-        }
-
-        @Override
-        public void onNext(T t) {
-            actual.onNext(t);
-        }
-
-        @Override
-        public void onError(Throwable throwable) {
-            actual.onError(throwable);
-        }
-
-        @Override
-        public void onComplete() {
-            actual.onComplete();
-        }
-
-        @Override
-        public void request(long n) {
-            s.request(n);
-        }
-
-        @Override
-        public void cancel() {
-            s.cancel();
-        }
-    }
 }

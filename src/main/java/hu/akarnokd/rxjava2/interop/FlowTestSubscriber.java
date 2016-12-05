@@ -28,6 +28,6 @@ public class FlowTestSubscriber<T> extends TestSubscriber<T> implements Flow.Sub
 
     @Override
     public final void onSubscribe(Flow.Subscription subscription) {
-        onSubscribe(new FlowSubscription(subscription));
+        onSubscribe(new FlowToRsSubscription(subscription));
     }
 }
