@@ -1,7 +1,12 @@
 language: java
 
-jdk:
-  - oraclejdk9
+sudo: required
+dist: trusty
+group: edge
+jdk: oraclejdk9
+
+#jdk:
+#  - oraclejdk9
 
 before_install:
   - chmod +x gradlew
