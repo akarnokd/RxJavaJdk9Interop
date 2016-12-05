@@ -46,7 +46,7 @@ apply plugin: 'maven'
 apply plugin: 'osgi'
 
 dependencies {
-    signature 'org.codehaus.mojo.signature:java18:1.0@signature'
+    signature 'org.codehaus.mojo.signature:java19:1.0@signature'
 
     compile "io.reactivex.rxjava2:rxjava:2.0.2"
 
@@ -139,7 +139,7 @@ license {
 }
 
 jacoco {
-    toolVersion = '0.7.7.201606060606' // See http://www.eclemma.org/jacoco/.
+    toolVersion = '0.7.8.201612030542' // See http://www.eclemma.org/jacoco/.
 }
 
 jacocoTestReport {
