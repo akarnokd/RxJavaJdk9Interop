@@ -16,5 +16,55 @@
 
 package hu.akarnokd.rxjava2.interop;
 
+import io.reactivex.subscribers.TestSubscriber;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.concurrent.SubmissionPublisher;
+import java.util.concurrent.TimeUnit;
+
 public class FlowInteropTest {
+
+    @Test
+    public void flowToFlowable() {
+
+        SubmissionPublisher<Integer> sp = new SubmissionPublisher<>();
+
+        TestSubscriber<Integer> ts = FlowInterop.fromFlowPublisher(sp)
+        .test();
+
+        sp.submit(1);
+        sp.submit(2);
+        sp.submit(3);
+        sp.submit(4);
+        sp.submit(5);
+
+        sp.close();
+
+        ts.awaitDone(5, TimeUnit.SECONDS)
+                .assertResult(1, 2, 3, 4, 5);
+    }
+
+    @Test
+    public void flowToFlowableError() throws Exception {
+
+        SubmissionPublisher<Integer> sp = new SubmissionPublisher<>();
+
+        TestSubscriber<Integer> ts = FlowInterop.fromFlowPublisher(sp)
+                .test();
+
+        sp.submit(1);
+        sp.submit(2);
+        sp.submit(3);
+        sp.submit(4);
+        sp.submit(5);
+
+        Thread.sleep(1000); // JDK bug workaround, otherwise no onSubscribe is called
+
+        sp.closeExceptionally(new IOException());
+
+
+        ts.awaitDone(5, TimeUnit.SECONDS)
+                .assertFailure(IOException.class, 1, 2, 3, 4, 5);
+    }
 }

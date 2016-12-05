@@ -17,6 +17,8 @@
 package hu.akarnokd.rxjava2.interop;
 
 import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
+import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.processors.FlowableProcessor;
 
 import java.util.concurrent.Flow;
@@ -39,8 +41,17 @@ public final class FlowInterop {
         if (source instanceof org.reactivestreams.Publisher) {
             return Flowable.fromPublisher((org.reactivestreams.Publisher<T>)source);
         }
-        // TODO implement
-        throw new UnsupportedOperationException();
+        ObjectHelper.requireNonNull(source, "source is null");
+        return new FlowableFromFlowPublisher<T>(source);
+    }
+
+    /**
+     * Converter function from a Flowable into a Publisher.
+     * @param <T> the value type
+     * @return the Function instance to be used with {@code Flowable.to()}.
+     */
+    public static <T> Function<Flowable<T>, Flow.Publisher<T>> toFlow() {
+        return f -> new FlowFromPublisher<>(f);
     }
 
     public static <T> FlowableProcessor<T> fromFlowProcessor(Flow.Processor<T, T> source) {
