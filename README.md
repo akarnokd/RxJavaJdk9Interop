@@ -9,7 +9,7 @@ RxJava 2 interop library for supporting Java 9 features such as Flow.*
 # Release
 
 ```groovy
-compile 'com.github.akarnokd:rxjava2-jdk9-interop:0.1.0'
+compile 'com.github.akarnokd:rxjava2-jdk9-interop:0.1.1'
 ```
 
 # Examples
