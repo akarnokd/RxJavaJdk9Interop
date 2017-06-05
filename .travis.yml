@@ -4,6 +4,11 @@ sudo: required
 dist: trusty
 group: edge
 jdk: oraclejdk9
+addons:
+  apt:
+    packages:
+      - oracle-java9-installer
+
 
 #jdk:
 #  - oraclejdk9
