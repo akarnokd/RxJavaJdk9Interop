@@ -139,7 +139,7 @@ license {
 }
 
 jacoco {
-    toolVersion = '0.7.8-SNAPSHOT' // See http://www.eclemma.org/jacoco/.
+    toolVersion = '0.7.9' // See http://www.eclemma.org/jacoco/.
 }
 
 jacocoTestReport {
