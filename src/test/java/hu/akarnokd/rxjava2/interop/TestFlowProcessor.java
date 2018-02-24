@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 David Karnok
+ * Copyright 2016-2018 David Karnok
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,8 @@ package hu.akarnokd.rxjava2.interop;
 import java.util.concurrent.Flow;
 
 /**
- * Very basic Flow.Processor
+ * Very basic Flow.Processor.
+ * @param <T> the input and output item type
  */
 public final class TestFlowProcessor<T> implements Flow.Processor<T, T>, Flow.Subscription {
 

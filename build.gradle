@@ -46,10 +46,14 @@ apply from: file('gradle/maven.gradle')
 apply plugin: 'maven'
 apply plugin: 'osgi'
 
+def reactiveStreamsVersion = "1.0.2"
+def rxjavaVersion = "2.1.10"
+def jmhLibVersion = "1.20"
+
 dependencies {
     signature 'org.codehaus.mojo.signature:java18:1.0@signature'
 
-    compile "io.reactivex.rxjava2:rxjava:2.1.10"
+    compile "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
@@ -107,7 +111,7 @@ publishing {
 }
 
 jmh {
-    jmhVersion = '1.19'
+    jmhVersion = jmhLibVersion
     humanOutputFile = null
     if (project.hasProperty('jmh')) {
         include = ".*" + project.jmh + ".*"
@@ -122,6 +126,16 @@ plugins.withType(EclipsePlugin) {
 
 javadoc {
     failOnError = false
+
+    exclude "**/internal/**"
+    exclude "**/test/**"
+    exclude "**/perf/**"
+    exclude "**/jmh/**"
+
+    options.links(
+        "https://docs.oracle.com/javase/9/docs/api/",
+        "http://www.reactive-streams.org/reactive-streams-${reactiveStreamsVersion}-javadoc/"
+    )
 }
 
 test {

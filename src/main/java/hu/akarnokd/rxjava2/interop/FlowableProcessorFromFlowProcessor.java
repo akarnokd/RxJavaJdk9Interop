@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 David Karnok
+ * Copyright 2016-2018 David Karnok
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,16 +34,7 @@ final class FlowableProcessorFromFlowProcessor<T> extends FlowableProcessor<T> {
 
     volatile int subscribers;
 
-    static final VarHandle SUBSCRIBERS;
-    static {
-        try {
-            SUBSCRIBERS = MethodHandles.lookup()
-                    .in(FlowableProcessorFromFlowProcessor.class)
-                    .findVarHandle(FlowableProcessorFromFlowProcessor.class, "subscribers", Integer.TYPE);
-        } catch (Exception ex) {
-            throw new InternalError(ex);
-        }
-    }
+    static final VarHandle SUBSCRIBERS = VH.find(MethodHandles.lookup(), FlowableProcessorFromFlowProcessor.class, "subscribers", Integer.TYPE);;
 
     volatile boolean done;
     Throwable error;
@@ -106,6 +97,8 @@ final class FlowableProcessorFromFlowProcessor<T> extends FlowableProcessor<T> {
     }
 
     final class FlowSubscriber extends AtomicBoolean implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
+
+        private static final long serialVersionUID = 3807666270718714448L;
 
         final org.reactivestreams.Subscriber<? super T> actual;
 
