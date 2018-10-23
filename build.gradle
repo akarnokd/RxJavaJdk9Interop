@@ -8,8 +8,7 @@ buildscript {
 
     dependencies {
         classpath 'gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.13.1'
-        classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.4"
-        classpath 'ru.vyarus:gradle-animalsniffer-plugin:1.2.0'
+        classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.7"
     }
 }
 
@@ -18,7 +17,6 @@ apply plugin: 'eclipse'
 apply plugin: "me.champeau.gradle.jmh"
 apply plugin: 'pmd'
 apply plugin: 'jacoco'
-apply plugin: 'ru.vyarus.animalsniffer'
 apply plugin: "com.github.hierynomus.license"
 
 sourceCompatibility = '1.9'
@@ -47,12 +45,10 @@ apply plugin: 'maven'
 apply plugin: 'osgi'
 
 def reactiveStreamsVersion = "1.0.2"
-def rxjavaVersion = "2.2.2"
+def rxjavaVersion = "2.2.3"
 def jmhLibVersion = "1.20"
 
 dependencies {
-    signature 'org.codehaus.mojo.signature:java18:1.0@signature'
-
     compile "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -203,8 +199,3 @@ task pmdPrint(dependsOn: 'pmdMain') << {
 
 build.dependsOn pmdPrint
 check.dependsOn pmdPrint
-
-
-animalsniffer {
-    annotation = 'io.reactivex.internal.util.SuppressAnimalSniffer'
-}
