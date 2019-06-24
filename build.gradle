@@ -45,7 +45,7 @@ apply plugin: 'maven'
 apply plugin: 'osgi'
 
 def reactiveStreamsVersion = "1.0.2"
-def rxjavaVersion = "2.2.9"
+def rxjavaVersion = "2.2.10"
 def jmhLibVersion = "1.20"
 
 dependencies {
