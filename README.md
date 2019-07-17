@@ -1,20 +1,20 @@
 # RxJavaJdk9Interop
 
-<a href='https://travis-ci.org/akarnokd/RxJavaJdk9Interop/builds'><img src='https://travis-ci.org/akarnokd/RxJavaJdk9Interop.svg?branch=master'></a>
-[![codecov.io](http://codecov.io/github/akarnokd/RxJavaJdk9Interop/coverage.svg?branch=master)](http://codecov.io/github/akarnokd/RxJava2Jdk9Interop?branch=master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava2-jdk9-interop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava2-jdk9-interop)
+<a href='https://travis-ci.org/akarnokd/RxJavaJdk9Interop/builds'><img src='https://travis-ci.org/akarnokd/RxJavaJdk9Interop.svg?branch=3.x'></a>
+[![codecov.io](http://codecov.io/github/akarnokd/RxJavaJdk9Interop/coverage.svg?branch=3.x)](http://codecov.io/github/akarnokd/RxJavaJdk9Interop?branch=3.x)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-jdk9-interop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-jdk9-interop)
 
-RxJava 2 interop library for supporting Java 9 features such as `Flow.*`
+RxJava 3 interop library for supporting Java 9 features such as `Flow.*`
 
 # Release
 
 ```groovy
-compile 'com.github.akarnokd:rxjava2-jdk9-interop:0.2.7'
+compile 'com.github.akarnokd:rxjava3-jdk9-interop:3.0.0-RC1'
 ```
 
 # Examples
 
-Converting from RxJava 2 to Java 9 Flow
+Converting from RxJava 3 to Java 9 Flow
 
 ```java
 
@@ -28,7 +28,7 @@ Flow.Processor<Integer, Integer> proc = FlowInterop
 
 ```
 
-Converting from Java 9 Flow to RxJava 2
+Converting from Java 9 Flow to RxJava 3
 
 ```java
 
@@ -46,7 +46,7 @@ FlowableProcessor<Integer> fproc = FlowInterop
 
 ```
 
-Note that RxJava 2 `FlowableProcessor`s don't support different input and output types
+Note that RxJava 3 `FlowableProcessor`s don't support different input and output types
 therefore the Flow.Processor should have the same type arguments.
 
 For convenience, there is a `FlowTestSubscriber` that extends `TestSubscriber` and

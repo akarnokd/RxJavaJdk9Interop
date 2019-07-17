@@ -17,6 +17,7 @@
 package hu.akarnokd.rxjava2.interop;
 
 import io.reactivex.Flowable;
+import io.reactivex.FlowableConverter;
 import io.reactivex.functions.Function;
 import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -57,9 +58,9 @@ public final class FlowInterop {
     /**
      * Converter function from a Flowable into a Publisher.
      * @param <T> the value type
-     * @return the Function instance to be used with {@code Flowable.to()}.
+     * @return the converter function instance to be used with {@code Flowable.to()}.
      */
-    public static <T> Function<Flowable<T>, Flow.Publisher<T>> toFlow() {
+    public static <T> FlowableConverter<T, Flow.Publisher<T>> toFlow() {
         return FlowFromPublisher::new;
     }
 

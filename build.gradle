@@ -23,7 +23,7 @@ sourceCompatibility = '1.9'
 targetCompatibility = '1.9'
 
 group = "com.github.akarnokd" 
-ext.githubProjectName = 'rxjava2-jdk9-interop'
+ext.githubProjectName = 'rxjava3-jdk9-interop'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -45,11 +45,11 @@ apply plugin: 'maven'
 apply plugin: 'osgi'
 
 def reactiveStreamsVersion = "1.0.2"
-def rxjavaVersion = "2.2.10"
+def rxjavaVersion = "3.0.0-RC1"
 def jmhLibVersion = "1.20"
 
 dependencies {
-    compile "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
+    compile "io.reactivex.rxjava3:rxjava:${rxjavaVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
@@ -84,12 +84,12 @@ artifacts {
 
 jar {
     manifest {
-        name = 'rxjava2-jdk9-interop'
+        name = 'rxjava3-jdk9-interop'
         instruction 'Bundle-Vendor', 'akarnokd'
         instruction 'Bundle-DocURL', 'https://github.com/akarnokd/RxJavaJdk9Interop'
         instruction 'Import-Package', '!org.junit,!junit.framework,!org.mockito.*,*'
         instruction 'Eclipse-ExtensibleAPI', 'true'
-        instruction "Automatic-Module-Name", "com.github.akarnokd.rxjava2jdk9interop"
+        instruction "Automatic-Module-Name", "com.github.akarnokd.rxjava3jdk9interop"
     }
 }
 
