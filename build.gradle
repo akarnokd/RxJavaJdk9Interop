@@ -86,7 +86,7 @@ jar {
     manifest {
         name = 'rxjava2-jdk9-interop'
         instruction 'Bundle-Vendor', 'akarnokd'
-        instruction 'Bundle-DocURL', 'https://github.com/akarnokd/RxJava2Jdk9Interop'
+        instruction 'Bundle-DocURL', 'https://github.com/akarnokd/RxJavaJdk9Interop'
         instruction 'Import-Package', '!org.junit,!junit.framework,!org.mockito.*,*'
         instruction 'Eclipse-ExtensibleAPI', 'true'
         instruction "Automatic-Module-Name", "com.github.akarnokd.rxjava2jdk9interop"
