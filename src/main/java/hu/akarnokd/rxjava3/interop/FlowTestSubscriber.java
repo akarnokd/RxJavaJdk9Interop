@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
+package hu.akarnokd.rxjava3.interop;
 
-import java.lang.invoke.*;
+import io.reactivex.subscribers.TestSubscriber;
+
+import java.util.concurrent.Flow;
 
 /**
- * Utility class to turn lookup failures into errors and
- * avoiding the need for static initializer with uncoverable
- * catch clauses
+ * A {@link TestSubscriber} also extending the {@link java.util.concurrent.Flow.Subscriber Flow.Subscriber} interface
+ * for testing {@link java.util.concurrent.Flow.Publisher Flow.Publisher}s.
+ *
+ * @param <T> the input value type
+ * @since 0.1.0
  */
-final class VH {
+public class FlowTestSubscriber<T> extends TestSubscriber<T> implements Flow.Subscriber<T> {
 
-    /** Utility class. */
-    private VH() {
-        throw new IllegalStateException("No instances!");
-    }
-
-    public static VarHandle find(MethodHandles.Lookup lookup, Class<?> parent, String field, Class<?> type) {
-        try {
-            return lookup.findVarHandle(parent, field, type);
-        } catch (Throwable ex) {
-            throw new  InternalError(ex);
-        }
+    @Override
+    public final void onSubscribe(Flow.Subscription subscription) {
+        onSubscribe(new FlowToRsSubscription(subscription));
     }
 }

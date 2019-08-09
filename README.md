@@ -17,6 +17,7 @@ compile 'com.github.akarnokd:rxjava3-jdk9-interop:3.0.0-RC1'
 Converting from RxJava 3 to Java 9 Flow
 
 ```java
+import hu.akarnokd.rxjava3.interop.*;
 
 Flow.Publisher<Integer> pub = Flowable.range(1, 5)
     .to(FlowInterop.toFlow());

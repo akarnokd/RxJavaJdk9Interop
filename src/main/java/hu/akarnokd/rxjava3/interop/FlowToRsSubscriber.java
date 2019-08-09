@@ -14,32 +14,28 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
-
-import org.reactivestreams.Processor;
+package hu.akarnokd.rxjava3.interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * Wraps an RS Processor into a Flow.Processor.
+ * Wraps an RS Subscriber and relays the events of a Flow.Subscriber.
+ * @since 0.1.0
  */
-final class FlowProcessorFromProcessor<T, R> implements Flow.Processor<T, R> {
+final class FlowToRsSubscriber<T> implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
 
-    final org.reactivestreams.Processor<T, R> actual;
+    final org.reactivestreams.Subscriber<? super T> actual;
 
-    FlowProcessorFromProcessor(Processor<T, R> actual) {
+    Flow.Subscription s;
+
+    FlowToRsSubscriber(org.reactivestreams.Subscriber<? super T> actual) {
         this.actual = actual;
-    }
-
-
-    @Override
-    public void subscribe(Flow.Subscriber<? super R> subscriber) {
-        actual.subscribe(new RsToFlowSubscriber<>(subscriber));
     }
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        actual.onSubscribe(new FlowToRsSubscription(subscription));
+        this.s = subscription;
+        actual.onSubscribe(this);
     }
 
     @Override
@@ -55,5 +51,15 @@ final class FlowProcessorFromProcessor<T, R> implements Flow.Processor<T, R> {
     @Override
     public void onComplete() {
         actual.onComplete();
+    }
+
+    @Override
+    public void request(long n) {
+        s.request(n);
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
     }
 }

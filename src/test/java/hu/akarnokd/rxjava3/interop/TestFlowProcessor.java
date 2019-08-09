@@ -14,52 +14,60 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
+package hu.akarnokd.rxjava3.interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * Wraps an RS Subscriber and relays the events of a Flow.Subscriber.
- * @since 0.1.0
+ * Very basic Flow.Processor.
+ * @param <T> the input and output item type
  */
-final class FlowToRsSubscriber<T> implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
+public final class TestFlowProcessor<T> implements Flow.Processor<T, T>, Flow.Subscription {
 
-    final org.reactivestreams.Subscriber<? super T> actual;
+    Flow.Subscriber<? super T> actual;
 
-    Flow.Subscription s;
-
-    FlowToRsSubscriber(org.reactivestreams.Subscriber<? super T> actual) {
-        this.actual = actual;
+    @Override
+    public void subscribe(Flow.Subscriber<? super T> subscriber) {
+        this.actual = subscriber;
+        subscriber.onSubscribe(this);
     }
 
     @Override
     public void onSubscribe(Flow.Subscription subscription) {
-        this.s = subscription;
-        actual.onSubscribe(this);
+        subscription.request(Long.MAX_VALUE);
     }
 
     @Override
     public void onNext(T t) {
-        actual.onNext(t);
+        Flow.Subscriber<? super T> a = actual;
+        if (a != null) {
+            a.onNext(t);
+        }
     }
 
     @Override
     public void onError(Throwable throwable) {
-        actual.onError(throwable);
+        Flow.Subscriber<? super T> a = actual;
+        if (a != null) {
+            a.onError(throwable);
+        }
     }
 
     @Override
     public void onComplete() {
-        actual.onComplete();
+        Flow.Subscriber<? super T> a = actual;
+        if (a != null) {
+            a.onComplete();
+        }
     }
 
     @Override
-    public void request(long n) {
-        s.request(n);
+    public void request(long l) {
+        // ignored
     }
 
     @Override
     public void cancel() {
-        s.cancel();
+        actual = null;
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
+package hu.akarnokd.rxjava3.interop;
 
 import io.reactivex.processors.FlowableProcessor;
 import org.reactivestreams.Subscriber;

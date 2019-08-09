@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
+package hu.akarnokd.rxjava3.interop;
 
 import io.reactivex.Flowable;
 import io.reactivex.FlowableConverter;
-import io.reactivex.functions.Function;
 import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.processors.FlowableProcessor;

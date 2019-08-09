@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
-
-import io.reactivex.subscribers.TestSubscriber;
+package hu.akarnokd.rxjava3.interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * A {@link TestSubscriber} also extending the {@link java.util.concurrent.Flow.Subscriber Flow.Subscriber} interface
- * for testing {@link java.util.concurrent.Flow.Publisher Flow.Publisher}s.
- *
- * @param <T> the input value type
+ * A Flow.Subscription that wraps an RS.Subscription.
  * @since 0.1.0
  */
-public class FlowTestSubscriber<T> extends TestSubscriber<T> implements Flow.Subscriber<T> {
+final class RsToFlowSubscription implements Flow.Subscription {
+
+    final org.reactivestreams.Subscription s;
+
+    RsToFlowSubscription(org.reactivestreams.Subscription s) {
+        this.s = s;
+    }
 
     @Override
-    public final void onSubscribe(Flow.Subscription subscription) {
-        onSubscribe(new FlowToRsSubscription(subscription));
+    public void request(long n) {
+        s.request(n);
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
     }
 }

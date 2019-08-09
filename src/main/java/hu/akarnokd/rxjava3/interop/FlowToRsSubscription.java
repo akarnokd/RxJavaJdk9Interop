@@ -14,26 +14,29 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava2.interop;
-
-import io.reactivex.Flowable;
+package hu.akarnokd.rxjava3.interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * Wraps and converts a Flow.Publisher into a Flowable.
+ * An RS Subscription that wraps a Flow.Subscription.
+ * @since 0.1.0
  */
-final class FlowableFromFlowPublisher<T> extends Flowable<T> {
+final class FlowToRsSubscription implements org.reactivestreams.Subscription {
 
-    final Flow.Publisher<T> source;
+    final Flow.Subscription s;
 
-    FlowableFromFlowPublisher(Flow.Publisher<T> source) {
-        this.source = source;
+    FlowToRsSubscription(Flow.Subscription s) {
+        this.s = s;
     }
 
     @Override
-    protected void subscribeActual(org.reactivestreams.Subscriber<? super T> s) {
-        source.subscribe(new FlowToRsSubscriber<>(s));
+    public void request(long n) {
+        s.request(n);
     }
 
+    @Override
+    public void cancel() {
+        s.cancel();
+    }
 }
