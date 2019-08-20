@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
-import io.reactivex.processors.FlowableProcessor;
-import org.reactivestreams.Subscriber;
-
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.VarHandle;
+import java.lang.invoke.*;
 import java.util.concurrent.Flow;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.reactivestreams.Subscriber;
+
+import io.reactivex.processors.FlowableProcessor;
 
 /**
  * Wraps a Flow.Processor and exposes it as a FlowableProcessor.

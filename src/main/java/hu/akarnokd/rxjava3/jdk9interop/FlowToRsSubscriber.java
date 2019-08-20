@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * Wraps a Flow.Subscriber and relays the events of an RS Subscriber.
+ * Wraps an RS Subscriber and relays the events of a Flow.Subscriber.
  * @since 0.1.0
  */
-final class RsToFlowSubscriber<T> implements org.reactivestreams.Subscriber<T>, Flow.Subscription {
+final class FlowToRsSubscriber<T> implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
 
-    final Flow.Subscriber<? super T> actual;
+    final org.reactivestreams.Subscriber<? super T> actual;
 
-    org.reactivestreams.Subscription s;
+    Flow.Subscription s;
 
-    RsToFlowSubscriber(Flow.Subscriber<? super T> actual) {
+    FlowToRsSubscriber(org.reactivestreams.Subscriber<? super T> actual) {
         this.actual = actual;
     }
 
     @Override
-    public void onSubscribe(org.reactivestreams.Subscription s) {
-        this.s = s;
+    public void onSubscribe(Flow.Subscription subscription) {
+        this.s = subscription;
         actual.onSubscribe(this);
     }
 
@@ -44,8 +44,8 @@ final class RsToFlowSubscriber<T> implements org.reactivestreams.Subscriber<T>, 
     }
 
     @Override
-    public void onError(Throwable t) {
-        actual.onError(t);
+    public void onError(Throwable throwable) {
+        actual.onError(throwable);
     }
 
     @Override
@@ -54,8 +54,8 @@ final class RsToFlowSubscriber<T> implements org.reactivestreams.Subscriber<T>, 
     }
 
     @Override
-    public void request(long l) {
-        s.request(l);
+    public void request(long n) {
+        s.request(n);
     }
 
     @Override

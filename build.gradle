@@ -44,8 +44,8 @@ apply from: file('gradle/maven.gradle')
 apply plugin: 'maven'
 apply plugin: 'osgi'
 
-def reactiveStreamsVersion = "1.0.2"
-def rxjavaVersion = "3.0.0-RC1"
+def reactiveStreamsVersion = "1.0.3-RC1"
+def rxjavaVersion = "3.0.0-RC2"
 def jmhLibVersion = "1.20"
 
 dependencies {
@@ -151,7 +151,7 @@ license {
 }
 
 jacoco {
-    toolVersion = '0.7.9' // See http://www.eclemma.org/jacoco/.
+    toolVersion = '0.8.4' // See http://www.eclemma.org/jacoco/.
 }
 
 jacocoTestReport {

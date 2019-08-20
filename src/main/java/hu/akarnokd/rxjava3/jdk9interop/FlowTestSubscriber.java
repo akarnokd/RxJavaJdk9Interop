@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
-
-import io.reactivex.subscribers.TestSubscriber;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
+
+import io.reactivex.subscribers.TestSubscriber;
 
 /**
  * A {@link TestSubscriber} also extending the {@link java.util.concurrent.Flow.Subscriber Flow.Subscriber} interface

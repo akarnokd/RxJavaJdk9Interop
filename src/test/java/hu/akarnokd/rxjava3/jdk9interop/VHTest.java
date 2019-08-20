@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 
 import org.junit.Test;
+
+import hu.akarnokd.rxjava3.jdk9interop.VH;
 
 public class VHTest {
 

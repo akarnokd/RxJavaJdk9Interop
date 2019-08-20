@@ -14,43 +14,20 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * Wraps an RS Subscriber and relays the events of a Flow.Subscriber.
+ * An RS Subscription that wraps a Flow.Subscription.
  * @since 0.1.0
  */
-final class FlowToRsSubscriber<T> implements Flow.Subscriber<T>, org.reactivestreams.Subscription {
+final class FlowToRsSubscription implements org.reactivestreams.Subscription {
 
-    final org.reactivestreams.Subscriber<? super T> actual;
+    final Flow.Subscription s;
 
-    Flow.Subscription s;
-
-    FlowToRsSubscriber(org.reactivestreams.Subscriber<? super T> actual) {
-        this.actual = actual;
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        this.s = subscription;
-        actual.onSubscribe(this);
-    }
-
-    @Override
-    public void onNext(T t) {
-        actual.onNext(t);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        actual.onError(throwable);
-    }
-
-    @Override
-    public void onComplete() {
-        actual.onComplete();
+    FlowToRsSubscription(Flow.Subscription s) {
+        this.s = s;
     }
 
     @Override

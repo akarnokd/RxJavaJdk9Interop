@@ -9,7 +9,7 @@ RxJava 3 interop library for supporting Java 9 features such as `Flow.*`
 # Release
 
 ```groovy
-compile 'com.github.akarnokd:rxjava3-jdk9-interop:3.0.0-RC1'
+compile 'com.github.akarnokd:rxjava3-jdk9-interop:3.0.0-RC2'
 ```
 
 # Examples
@@ -17,7 +17,7 @@ compile 'com.github.akarnokd:rxjava3-jdk9-interop:3.0.0-RC1'
 Converting from RxJava 3 to Java 9 Flow
 
 ```java
-import hu.akarnokd.rxjava3.interop.*;
+import hu.akarnokd.rxjava3.jdk9interop.*;
 
 Flow.Publisher<Integer> pub = Flowable.range(1, 5)
     .to(FlowInterop.toFlow());

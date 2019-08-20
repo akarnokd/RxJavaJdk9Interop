@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
-
-import io.reactivex.Flowable;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
+
+import io.reactivex.Flowable;
 
 /**
  * Wraps and converts a Flow.Publisher into a Flowable.

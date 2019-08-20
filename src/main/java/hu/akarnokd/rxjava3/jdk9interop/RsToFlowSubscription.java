@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
-import java.lang.invoke.*;
+import java.util.concurrent.Flow;
 
 /**
- * Utility class to turn lookup failures into errors and
- * avoiding the need for static initializer with uncoverable
- * catch clauses
+ * A Flow.Subscription that wraps an RS.Subscription.
+ * @since 0.1.0
  */
-final class VH {
+final class RsToFlowSubscription implements Flow.Subscription {
 
-    /** Utility class. */
-    private VH() {
-        throw new IllegalStateException("No instances!");
+    final org.reactivestreams.Subscription s;
+
+    RsToFlowSubscription(org.reactivestreams.Subscription s) {
+        this.s = s;
     }
 
-    public static VarHandle find(MethodHandles.Lookup lookup, Class<?> parent, String field, Class<?> type) {
-        try {
-            return lookup.findVarHandle(parent, field, type);
-        } catch (Throwable ex) {
-            throw new  InternalError(ex);
-        }
+    @Override
+    public void request(long n) {
+        s.request(n);
+    }
+
+    @Override
+    public void cancel() {
+        s.cancel();
     }
 }

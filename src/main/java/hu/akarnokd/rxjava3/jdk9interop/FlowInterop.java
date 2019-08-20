@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
-import io.reactivex.Flowable;
-import io.reactivex.FlowableConverter;
+import java.util.concurrent.Flow;
+
+import io.reactivex.*;
 import io.reactivex.internal.functions.ObjectHelper;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.processors.FlowableProcessor;
-
-import java.util.concurrent.Flow;
 
 /**
  * Converters to and from Java 9 Flow components.

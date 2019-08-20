@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import static org.junit.Assert.*;
 

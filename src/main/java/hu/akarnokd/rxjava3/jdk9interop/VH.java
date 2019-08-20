@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
-import java.util.concurrent.Flow;
+import java.lang.invoke.*;
 
 /**
- * Wraps and converts an RS Publisher into a Flow.Publisher.
- * @since 0.1.0
+ * Utility class to turn lookup failures into errors and
+ * avoiding the need for static initializer with uncoverable
+ * catch clauses
  */
-final class FlowFromPublisher<T> implements Flow.Publisher<T> {
+final class VH {
 
-    final org.reactivestreams.Publisher<T> source;
-
-    FlowFromPublisher(org.reactivestreams.Publisher<T> source) {
-        this.source = source;
+    /** Utility class. */
+    private VH() {
+        throw new IllegalStateException("No instances!");
     }
 
-    @Override
-    public void subscribe(Flow.Subscriber<? super T> subscriber) {
-        source.subscribe(new RsToFlowSubscriber<>(subscriber));
+    public static VarHandle find(MethodHandles.Lookup lookup, Class<?> parent, String field, Class<?> type) {
+        try {
+            return lookup.findVarHandle(parent, field, type);
+        } catch (Throwable ex) {
+            throw new  InternalError(ex);
+        }
     }
-
 }

@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-package hu.akarnokd.rxjava3.interop;
+package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
 /**
- * A Flow.Subscription that wraps an RS.Subscription.
+ * Wraps and converts an RS Publisher into a Flow.Publisher.
  * @since 0.1.0
  */
-final class RsToFlowSubscription implements Flow.Subscription {
+final class FlowFromPublisher<T> implements Flow.Publisher<T> {
 
-    final org.reactivestreams.Subscription s;
+    final org.reactivestreams.Publisher<T> source;
 
-    RsToFlowSubscription(org.reactivestreams.Subscription s) {
-        this.s = s;
+    FlowFromPublisher(org.reactivestreams.Publisher<T> source) {
+        this.source = source;
     }
 
     @Override
-    public void request(long n) {
-        s.request(n);
+    public void subscribe(Flow.Subscriber<? super T> subscriber) {
+        source.subscribe(new RsToFlowSubscriber<>(subscriber));
     }
 
-    @Override
-    public void cancel() {
-        s.cancel();
-    }
 }
