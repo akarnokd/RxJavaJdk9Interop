@@ -25,10 +25,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Test;
 
-import io.reactivex.*;
-import io.reactivex.internal.subscriptions.BooleanSubscription;
-import io.reactivex.processors.*;
-import io.reactivex.subscribers.TestSubscriber;
+import io.reactivex.rxjava3.core.*;
+import io.reactivex.rxjava3.internal.subscriptions.BooleanSubscription;
+import io.reactivex.rxjava3.processors.*;
+import io.reactivex.rxjava3.subscribers.TestSubscriber;
 
 public class FlowInteropTest {
 

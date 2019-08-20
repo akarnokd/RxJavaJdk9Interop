@@ -18,10 +18,10 @@ package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
-import io.reactivex.*;
-import io.reactivex.internal.functions.ObjectHelper;
-import io.reactivex.plugins.RxJavaPlugins;
-import io.reactivex.processors.FlowableProcessor;
+import io.reactivex.rxjava3.core.*;
+import io.reactivex.rxjava3.internal.functions.ObjectHelper;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
+import io.reactivex.rxjava3.processors.FlowableProcessor;
 
 /**
  * Converters to and from Java 9 Flow components.

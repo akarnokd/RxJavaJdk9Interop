@@ -18,7 +18,7 @@ package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
-import io.reactivex.subscribers.TestSubscriber;
+import io.reactivex.rxjava3.subscribers.TestSubscriber;
 
 /**
  * A {@link TestSubscriber} also extending the {@link java.util.concurrent.Flow.Subscriber Flow.Subscriber} interface

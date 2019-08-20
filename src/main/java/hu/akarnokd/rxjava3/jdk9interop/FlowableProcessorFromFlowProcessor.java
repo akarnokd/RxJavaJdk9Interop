@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.reactivestreams.Subscriber;
 
-import io.reactivex.processors.FlowableProcessor;
+import io.reactivex.rxjava3.processors.FlowableProcessor;
 
 /**
  * Wraps a Flow.Processor and exposes it as a FlowableProcessor.

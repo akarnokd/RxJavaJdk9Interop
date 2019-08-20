@@ -21,8 +21,6 @@ import java.lang.reflect.Constructor;
 
 import org.junit.Test;
 
-import hu.akarnokd.rxjava3.jdk9interop.VH;
-
 public class VHTest {
 
     public static void checkUtilityClass(Class<?> clazz) {

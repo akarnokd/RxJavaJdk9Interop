@@ -18,7 +18,7 @@ package hu.akarnokd.rxjava3.jdk9interop;
 
 import java.util.concurrent.Flow;
 
-import io.reactivex.Flowable;
+import io.reactivex.rxjava3.core.Flowable;
 
 /**
  * Wraps and converts a Flow.Publisher into a Flowable.
