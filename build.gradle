@@ -17,7 +17,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:$licenseVersion'
+        classpath "gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:$licenseVersion"
         classpath "me.champeau.gradle:jmh-gradle-plugin:$jmhGradleVersion"
     }
 }
