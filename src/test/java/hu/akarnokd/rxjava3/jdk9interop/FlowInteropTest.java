@@ -312,7 +312,7 @@ public class FlowInteropTest {
     public void flowProcessorToFlowableProcessorDecrementOnce() {
         AtomicReference<Flow.Subscriber<? super Integer>> sub = new AtomicReference<>();
 
-        Flow.Processor<Integer, Integer> proc = new Flow.Processor<Integer, Integer>() {
+        Flow.Processor<Integer, Integer> proc = new Flow.Processor<>() {
 
             @Override
             public void onComplete() {
