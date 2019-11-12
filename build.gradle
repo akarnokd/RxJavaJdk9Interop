@@ -2,12 +2,14 @@ buildscript {
     ext.reactiveStreamsVersion = "1.0.3"
     ext.rxjavaVersion = "3.0.0-RC4"
     ext.rxjava3DocVersion = "3.x"
-    ext.jmhLibVersion = "1.20"
+    ext.jmhLibVersion = "1.21"
     ext.licenseVersion = "0.15.0"
-    ext.jmhGradleVersion = "0.4.8"
+    ext.jmhGradleVersion = "0.5.0"
     ext.junitVersion = "4.12"
-    ext.jacocoVersion = "0.8.4"
+    ext.jacocoVersion = "0.8.5"
     ext.pmdVersion = "5.4.2"
+	ext.bndVersion = "4.3.0"
+	ext.mavenPublishPluginVersion = "0.8.0"
 
     repositories {
         mavenCentral()
@@ -19,6 +21,8 @@ buildscript {
     dependencies {
         classpath "gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:$licenseVersion"
         classpath "me.champeau.gradle:jmh-gradle-plugin:$jmhGradleVersion"
+        classpath "biz.aQute.bnd:biz.aQute.bnd.gradle:$bndVersion"
+        classpath "com.vanniktech:gradle-maven-publish-plugin:$mavenPublishPluginVersion"
     }
 }
 
@@ -51,55 +55,28 @@ repositories {
     //maven { url 'http://repo.spring.io/libs-snapshot' }
 }
 
-apply from: file('gradle/maven.gradle')
-apply plugin: 'maven'
-apply plugin: 'osgi'
-
 dependencies {
     compile "io.reactivex.rxjava3:rxjava:${rxjavaVersion}"
 
     testCompile group: 'junit', name: 'junit', version: junitVersion
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
+apply plugin: 'maven'
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives jar
-    archives sourcesJar
-    archives javadocJar
-}
+apply plugin: 'biz.aQute.bnd.builder'
 
 jar {
-    manifest {
-        name = 'rxjava3-jdk9-interop'
-        instruction 'Bundle-Vendor', 'akarnokd'
-        instruction 'Bundle-DocURL', 'https://github.com/akarnokd/RxJavaJdk9Interop'
-        instruction 'Import-Package', '!org.junit,!junit.framework,!org.mockito.*,*'
-        instruction 'Eclipse-ExtensibleAPI', 'true'
-        instruction "Automatic-Module-Name", "com.github.akarnokd.rxjava3jdk9interop"
-    }
+    bnd ('Bundle-Name': 'rxjava3-jdk9-interop',
+            'Bundle-Vendor': 'akarnokd',
+            'Bundle-Description': 'RxJava 3.x extra sources, operators and components and ports of many 1.x companion libraries.',
+            'Import-Package': '!org.junit,!junit.framework,!org.mockito.*,*',
+            'Bundle-DocURL': 'https://github.com/akarnokd/RxJavaJdk9Interop',
+			'Eclipse-ExtensibleAPI': 'true',
+			'Automatic-Module-Name': 'com.github.akarnokd.rxjava3jdk9interop'
+		)
 }
 
-apply plugin: 'maven-publish'
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact (sourcesJar) { 
-                classifier = 'sources'
-            }
-        }
-    }
-}
+apply plugin: "com.vanniktech.maven.publish"
 
 jmh {
     jmhVersion = jmhLibVersion
@@ -176,7 +153,7 @@ pmdMain {
     }
 }
 
-task pmdPrint(dependsOn: 'pmdMain') << {
+task pmdPrint(dependsOn: 'pmdMain') doLast {
     File file = rootProject.file('build/reports/pmd/main.xml')
     if (file.exists()) {
 
