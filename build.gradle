@@ -1,6 +1,6 @@
 buildscript {
     ext.reactiveStreamsVersion = "1.0.3"
-    ext.rxjavaVersion = "3.0.0-RC6"
+    ext.rxjavaVersion = "3.0.0-RC7"
     ext.rxjava3DocVersion = "3.x"
     ext.jmhLibVersion = "1.21"
     ext.licenseVersion = "0.15.0"
@@ -33,8 +33,8 @@ apply plugin: 'pmd'
 apply plugin: 'jacoco'
 apply plugin: "com.github.hierynomus.license"
 
-sourceCompatibility = '1.9'
-targetCompatibility = '1.9'
+sourceCompatibility = JavaVersion.VERSION_1_9
+targetCompatibility = JavaVersion.VERSION_1_9
 
 group = "com.github.akarnokd" 
 ext.githubProjectName = 'rxjava3-jdk9-interop'

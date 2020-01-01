@@ -16,10 +16,10 @@
 
 package hu.akarnokd.rxjava3.jdk9interop;
 
+import java.util.Objects;
 import java.util.concurrent.Flow;
 
 import io.reactivex.rxjava3.core.*;
-import io.reactivex.rxjava3.internal.functions.ObjectHelper;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.processors.FlowableProcessor;
 
@@ -49,7 +49,7 @@ public final class FlowInterop {
         if (source instanceof org.reactivestreams.Publisher) {
             return Flowable.fromPublisher((org.reactivestreams.Publisher<T>)source);
         }
-        ObjectHelper.requireNonNull(source, "source is null");
+        Objects.requireNonNull(source, "source is null");
         return RxJavaPlugins.onAssembly(new FlowableFromFlowPublisher<>(source));
     }
 
@@ -74,7 +74,7 @@ public final class FlowInterop {
         if (source instanceof FlowableProcessor) {
             return (FlowableProcessor<T>)source;
         }
-        ObjectHelper.requireNonNull(source, "source is null");
+        Objects.requireNonNull(source, "source is null");
         return new FlowableProcessorFromFlowProcessor<>(source);
     }
 
@@ -90,7 +90,7 @@ public final class FlowInterop {
         if (source instanceof Flow.Publisher) {
             return (Flow.Publisher<T>)source;
         }
-        ObjectHelper.requireNonNull(source, "source is null");
+        Objects.requireNonNull(source, "source is null");
         return new FlowFromPublisher<>(source);
     }
 
@@ -107,7 +107,7 @@ public final class FlowInterop {
         if (source instanceof Flow.Processor) {
             return (Flow.Processor<T, R>)source;
         }
-        ObjectHelper.requireNonNull(source, "source is null");
+        Objects.requireNonNull(source, "source is null");
         return new FlowProcessorFromProcessor<>(source);
     }
 }
