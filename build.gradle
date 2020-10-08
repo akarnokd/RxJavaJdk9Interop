@@ -1,6 +1,6 @@
 buildscript {
     ext.reactiveStreamsVersion = "1.0.3"
-    ext.rxjavaVersion = "3.0.6"
+    ext.rxjavaVersion = "3.0.7"
     ext.rxjava3DocVersion = "3.x"
     ext.jmhLibVersion = "1.21"
     ext.licenseVersion = "0.15.0"
