@@ -8,7 +8,7 @@ buildscript {
     ext.junitVersion = "4.12"
     ext.jacocoVersion = "0.8.5"
     ext.pmdVersion = "5.4.2"
-	ext.bndVersion = "5.1.2"
+	ext.bndVersion = "5.2.0"
 	ext.mavenPublishPluginVersion = "0.8.0"
 
     repositories {
