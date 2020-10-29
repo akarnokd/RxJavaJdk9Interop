@@ -1,6 +1,6 @@
 # RxJavaJdk9Interop
 
-<a href='https://travis-ci.org/akarnokd/RxJavaJdk9Interop/builds'><img src='https://travis-ci.org/akarnokd/RxJavaJdk9Interop.svg?branch=3.x'></a>
+<a href='https://travis-ci.com/akarnokd/RxJavaJdk9Interop/builds'><img src='https://travis-ci.com/akarnokd/RxJavaJdk9Interop.svg?branch=3.x'></a>
 [![codecov.io](http://codecov.io/github/akarnokd/RxJavaJdk9Interop/coverage.svg?branch=3.x)](http://codecov.io/github/akarnokd/RxJavaJdk9Interop?branch=3.x)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-jdk9-interop/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.akarnokd/rxjava3-jdk9-interop)
 
