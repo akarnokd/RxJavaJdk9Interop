@@ -9,7 +9,7 @@ buildscript {
     ext.jacocoVersion = "0.8.5"
     ext.pmdVersion = "5.4.2"
 	ext.bndVersion = "5.2.0"
-	ext.mavenPublishPluginVersion = "0.8.0"
+	ext.mavenPublishPluginVersion = "0.14.0"
 
     repositories {
         mavenCentral()
