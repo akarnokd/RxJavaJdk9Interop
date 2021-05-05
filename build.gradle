@@ -6,7 +6,7 @@ buildscript {
     ext.licenseVersion = "0.15.0"
     ext.jmhGradleVersion = "0.5.3"
     ext.junitVersion = "4.12"
-    ext.jacocoVersion = "0.8.5"
+    ext.jacocoVersion = "0.8.7"
     ext.pmdVersion = "5.4.2"
 	ext.bndVersion = "5.3.0"
 	ext.mavenPublishPluginVersion = "0.8.0"
