@@ -71,9 +71,10 @@ jar {
             'Bundle-Description': 'RxJava 3.x extra sources, operators and components and ports of many 1.x companion libraries.',
             'Import-Package': '!org.junit,!junit.framework,!org.mockito.*,*',
             'Bundle-DocURL': 'https://github.com/akarnokd/RxJavaJdk9Interop',
-			'Eclipse-ExtensibleAPI': 'true',
-			'Automatic-Module-Name': 'com.github.akarnokd.rxjava3jdk9interop'
-		)
+            'Eclipse-ExtensibleAPI': 'true',
+            "Export-Package": "hu.akarnokd.rxjava3.jdk9interop.*",
+            'Automatic-Module-Name': 'com.github.akarnokd.rxjava3jdk9interop'
+    )
 }
 
 apply plugin: "com.vanniktech.maven.publish"
